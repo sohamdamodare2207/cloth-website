@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #faf8f5;
+  --charcoal: #2c2c2c;
+  --terracotta: #c4705a;
+  --stone-100: #f5f5f4;
+  --stone-200: #e7e5e4;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-charcoal: var(--charcoal);
+  --color-terracotta: var(--terracotta);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif);
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
