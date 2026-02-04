@@ -37,12 +37,10 @@ create trigger on_auth_user_created
 -- RLS: users can read/update their own profile
 alter table public.profiles enable row level security;
 
-drop policy if exists "Users can view own profile" on public.profiles;
 create policy "Users can view own profile"
   on public.profiles for select
   using (auth.uid() = id);
 
-drop policy if exists "Users can update own profile" on public.profiles;
 create policy "Users can update own profile"
   on public.profiles for update
   using (auth.uid() = id);
@@ -64,12 +62,10 @@ create index if not exists orders_user_id_idx on public.orders(user_id);
 
 alter table public.orders enable row level security;
 
-drop policy if exists "Users can view own orders" on public.orders;
 create policy "Users can view own orders"
   on public.orders for select
   using (auth.uid() = user_id);
 
-drop policy if exists "Users can insert own orders" on public.orders;
 create policy "Users can insert own orders"
   on public.orders for insert
   with check (auth.uid() = user_id);
@@ -91,7 +87,8 @@ create table if not exists public.order_items (
 
 create index if not exists order_items_order_id_idx on public.order_items(order_id);
 
-drop policy if exists "Users can view own order items" on public.order_items;
+alter table public.order_items enable row level security;
+
 create policy "Users can view own order items"
   on public.order_items for select
   using (
@@ -99,9 +96,6 @@ create policy "Users can view own order items"
       select 1 from public.orders o
       where o.id = order_items.order_id and o.user_id = auth.uid()
     )
-  );
-
-drop policy if exists "Users can insert order items for own orders" on public.order_items;    )
   );
 
 create policy "Users can insert order items for own orders"
@@ -131,7 +125,6 @@ create table if not exists public.cart_items (
 
 create index if not exists cart_items_user_id_idx on public.cart_items(user_id);
 
-drop policy if exists "Users can manage own cart" on public.cart_items;
 alter table public.cart_items enable row level security;
 
 create policy "Users can manage own cart"
