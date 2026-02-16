@@ -25,7 +25,7 @@ export const products = [
     name: "High-Waist Wide-Leg Trousers",
     price: 10499,
     category: "Pants",
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=500&fit=crop",
+    image: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=400&h=500&fit=crop",
     description: "Tailored wide-leg trousers with a high waist and clean front. Mid-weight wool blend.",
     sizes: ["28", "30", "32", "34", "36"],
     colors: ["Black", "Camel", "Grey"],
